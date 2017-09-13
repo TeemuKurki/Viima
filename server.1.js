@@ -4,37 +4,25 @@ var request = require('request');
 var bodyParser = require('body-parser');
 
 require("./arrayCompare.js");
+var getAuthorization = require("./restRequests/getAuthorization.js");
+var getUser = require("./restRequests/getUser.js");
 var getActivities = require("./restRequests/getActivities.js");
 var getItems = require("./restRequests/getItems.js");
 var getUserProfiles = require("./restRequests/getUserProfiles.js");
 
 app.use(bodyParser.text());
 
+getAuthorization.getAuthorization(app, request);
+//var user = getUser.getUser(app, request);
 
-var setRequestLoop = setInterval(function(){
-    getActivities.getActivities(app,request);
-}, 5000);
+//var setRequestLoop = setInterval(function(){
+//    getActivities.getActivities(app,request);
+//}, 5000);
 
 getItems.getItems(app,request);
 
 getUserProfiles.getUserProfiles(app,request);
 
-
-/*var counter = 1;
-
-var sendRequestLoop = setInterval(function(){
-    request.post({
-        uri: "https://hooks.slack.com/services/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",
-        body: "{'text': '"+counter+"'}",
-        function (err,res,body) {       
-        }
-    });
-  counter++;  
-}, 10000);
-
-if(counter == 10){
-    clearInterval(sendRequestLoop);
-}*/
 
 
 var port = 3000;
