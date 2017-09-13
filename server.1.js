@@ -4,24 +4,32 @@ var request = require('request');
 var bodyParser = require('body-parser');
 
 require("./arrayCompare.js");
-var getAuthorization = require("./restRequests/getAuthorization.js");
 var getUser = require("./restRequests/getUser.js");
 var getActivities = require("./restRequests/getActivities.js");
-var getItems = require("./restRequests/getItems.js");
-var getUserProfiles = require("./restRequests/getUserProfiles.js");
+//var getItems = require("./restRequests/getItems.js");
+//var getUserProfiles = require("./restRequests/getUserProfiles.js");
 
 app.use(bodyParser.text());
 
-getAuthorization.getAuthorization(app, request);
-//var user = getUser.getUser(app, request);
+if(process.argv[2] === "" || process.argv[2] === undefined){
+    console.log("Insert Access token as a parameter");
+    return;
+}
+var token = process.argv[2];
 
-//var setRequestLoop = setInterval(function(){
-//    getActivities.getActivities(app,request);
-//}, 5000);
+getUser.getUser(app, request, token, function(body){
+    var board = body.customer_ids_where_admin[0];
+    if(board != ""){
+        var setRequestLoop = setInterval(function(){
+            getActivities.getActivities(app,request, board);
+        }, 5000);
+    }
+});
 
-getItems.getItems(app,request);
 
-getUserProfiles.getUserProfiles(app,request);
+//getItems.getItems(app,request);
+
+//getUserProfiles.getUserProfiles(app,request);
 
 
 
