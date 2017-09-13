@@ -50,9 +50,9 @@ var countUpdate = -1;
 app.get("/getActivities",function(req,res){
     request.get("https://app.viima.com/api/customers/1808/activities/", function(viimaErr,viimaRes, viimaBody){
         var jsonResponseActivities = JSON.parse(viimaBody);
-
         if(countUpdate === -1){
             countUpdate = jsonResponseActivities.count;
+            console.log("countUpdate Setted to jsonResponseActivities.count");
         }
         if(countUpdate < jsonResponseActivities.count){
             var j = 0;
@@ -68,6 +68,7 @@ app.get("/getActivities",function(req,res){
                 j++;
                 
             }
+            countUpdate = jsonResponseActivities.count;
         }
         res.setHeader('Content-Type', 'application/json');
         res.send(jsonResponseActivities);
@@ -85,24 +86,15 @@ app.get("/getUser_profiles", function(req,res){
 var textFromScript = "tekstiä scriptistä";
 
 function sendMessageToSlack(message){
+    var jsonBody = JSON.stringify({"text": message})
     request.post({
-        uri: "https://hooks.slack.com/services/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",
-        body: "{'text': '"+message+"'}",
+        uri: "https://hooks.slack.com/services/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",
+        body: jsonBody,
+        //body: "{'text': '"+message+"'}",
         function (err,res,body) {       
         }
     });
 }
-
-app.get("/slack",function(req,res){
-    request.post({
-        uri: "https://hooks.slack.com/services/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",
-        body: "{'text': '"+textFromScript+"'}",
-        function (err,res,body) {       
-        }
-    });
-    res.send("Sent");
-    console.log(req.body);
-});
 
 /*var counter = 1;
 
