@@ -15,13 +15,15 @@ if(process.argv[3] === "" || process.argv[3] === undefined){
     console.log("Insert Access token as a second parameter");
     return;
 }
-
+//Get Access token from first parameter
 var token = process.argv[2];
+//Get Webhook Url from second parameter
 var webhookUrl = process.argv[3];
 
 getUser.getUser(app, request, token, function(body){
     var board = body.customer_ids_where_admin[0];
     if(board != ""){
+        //Run getActivities every 5 second
         var setRequestLoop = setInterval(function(){
             getActivities.getActivities(app,request, board, webhookUrl);
         }, 5000);

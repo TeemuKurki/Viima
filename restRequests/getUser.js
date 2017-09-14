@@ -9,8 +9,6 @@ function getUser(app, request, authorizationToken, callback){
     }
        request(options, function(viimaErr, viimaRes, viimaBody){
             var jsonResponseUser = JSON.parse(viimaBody);
-           //console.log(viimaRes);
-            //jsonResponseUser.customer_ids_where_admin;
             callback(jsonResponseUser);
         });
              
