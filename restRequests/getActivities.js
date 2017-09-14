@@ -15,7 +15,7 @@ function getActivities(app, request, board, webhookUrl){
                             send.sendMessageToSlack(webhookUrl, request, result.fullname + " added a new comment to "+ result.name, result.content);
                             break;
                         case "item":
-                            send.sendMessageToSlack(webhookUrl, request, result.fullname + " created an new idea "+ result.name,result.content);
+                            send.sendMessageToSlack(webhookUrl, request, result.fullname + " created an new idea: "+ result.name,result.content);
                             break;
                         default:
                             console.log("Default triggered! \nModel: "+result.model);

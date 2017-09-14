@@ -1,12 +1,10 @@
 var express = require('express');
 var app = express();
 var request = require('request');
-var bodyParser = require('body-parser');
 
 var getUser = require("./restRequests/getUser.js");
 var getActivities = require("./restRequests/getActivities.js");
 
-app.use(bodyParser.text());
 
 if(process.argv[2] === "" || process.argv[2] === undefined){
     console.log("Insert Access token as a first parameter");
