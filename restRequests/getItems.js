@@ -1,6 +1,6 @@
 
-function getItems(app, request){
-    request.get("https://app.viima.com/api/customers/1808/items/", function(viimaErr,viimaRes, viimaBody){
+function getItems(app, request, board){
+    request.get("https://app.viima.com/api/customers/"+board+"/items/", function(viimaErr,viimaRes, viimaBody){
         var jsonResponseItems = JSON.parse(viimaBody);
     });
 }

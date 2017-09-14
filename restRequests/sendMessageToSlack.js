@@ -1,4 +1,4 @@
-function sendMessageToSlack(request, message, title){
+function sendMessageToSlack(webhookUrl, request, message, title){
     var jsonBody = JSON.stringify({
         "text": message,
         "attachments": [{
@@ -6,9 +6,8 @@ function sendMessageToSlack(request, message, title){
             }]
         })
     request.post({
-        uri: "https://hooks.slack.com/services/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",
+        uri: webhookUrl,
         body: jsonBody,
-        //body: "{'text': '"+message+"'}",
         function (err,res,body) {       
         }
     });

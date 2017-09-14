@@ -1,5 +1,5 @@
-function getUserProfiles(app, request){
-    request.get("https://app.viima.com/api/customers/1808/user_profiles/", function(viimaErr, viimaRes, viimaBody){
+function getUserProfiles(app, request, board){
+    request.get("https://app.viima.com/api/customers/"+board+"/user_profiles/", function(viimaErr, viimaRes, viimaBody){
         var jsonResponseProfiles = JSON.parse(viimaBody);
     });
 }
