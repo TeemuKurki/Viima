@@ -10,19 +10,22 @@ function getActivities(app, request, board){
                 var j = 0;
                 for (var i = countUpdate; i < jsonResponseActivities.count; i++) {
                     var result = jsonResponseActivities.results[j];
-                    switch(jsonResponseActivities.results[j].model){
+                    switch(result.model){
                         case "comment":
                             send.sendMessageToSlack(request, result.fullname + " added new comment to "+ result.name, result.content);
                             break;
                         case "item":
                             send.sendMessageToSlack(request, result.fullname + " created new item "+ result.name,result.content);
                             break;
+                        default:
+                            console.log("Default triggered! \nModel: "+result.model);
+                            break;
                     }
                     j++;
                     
                 }
-                countUpdate = jsonResponseActivities.count;
             }
+            countUpdate = jsonResponseActivities.count;
         });
 }
 module.exports.getActivities = getActivities;

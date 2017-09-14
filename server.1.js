@@ -3,11 +3,8 @@ var app = express();
 var request = require('request');
 var bodyParser = require('body-parser');
 
-require("./arrayCompare.js");
 var getUser = require("./restRequests/getUser.js");
 var getActivities = require("./restRequests/getActivities.js");
-//var getItems = require("./restRequests/getItems.js");
-//var getUserProfiles = require("./restRequests/getUserProfiles.js");
 
 app.use(bodyParser.text());
 
@@ -15,6 +12,7 @@ if(process.argv[2] === "" || process.argv[2] === undefined){
     console.log("Insert Access token as a parameter");
     return;
 }
+
 var token = process.argv[2];
 
 getUser.getUser(app, request, token, function(body){
@@ -25,11 +23,6 @@ getUser.getUser(app, request, token, function(body){
         }, 5000);
     }
 });
-
-
-//getItems.getItems(app,request);
-
-//getUserProfiles.getUserProfiles(app,request);
 
 
 
